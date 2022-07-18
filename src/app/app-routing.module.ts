@@ -1,38 +1,27 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
-    pathMatch: 'full'
+    redirectTo: 'auth',
+    pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'auth',
+    loadChildren: () => import('./auth/auth-Pages/auth.module').then(m => m.AuthModule),
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
-    path: 'cart',
-    loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
-  },
-  {
-    path: 'food-page',
-    loadChildren: () => import('./food-page/food-page.module').then( m => m.FoodPagePageModule)
+    path: 'admin',
+    loadChildren: () => import('./admin/dashboard.module').then(m => m.DarshanModule),
+    
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
